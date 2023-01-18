@@ -41,7 +41,7 @@ export default {
 
 <template>
   <div id="app">
-    <h1 class="title">FAQs</h1>
+    <h1 class="title">FAQs with ButterCMS</h1>
 
     <div class="search-wrapper">
       <input type="text" v-model="search" placeholder="Search here.." />
