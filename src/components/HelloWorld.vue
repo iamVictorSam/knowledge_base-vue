@@ -103,7 +103,8 @@ div#app {
         transform: scale(1.5);
         & + label {
           font-size: 18px;
-          transform: translateY(-64px) translateX(-12px);
+          font-weight: bold;
+          transform: translateY(-55px) translateX(-122px);
         }
       }
       &::-webkit-input-placeholder {
@@ -115,6 +116,7 @@ div#app {
   }
   .title {
     color: black;
+    padding-bottom: 30px;
   }
 
   .wrapper {
