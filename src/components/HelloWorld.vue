@@ -41,6 +41,8 @@ export default {
 
 <template>
   <div id="app">
+    <h1 class="title">FAQs</h1>
+
     <div class="search-wrapper">
       <input type="text" v-model="search" placeholder="Search here.." />
     <label>Search Question</label>
@@ -110,6 +112,9 @@ div#app {
         font-weight: 100;
       }
     }
+  }
+  .title {
+    color: black;
   }
 
   .wrapper {
