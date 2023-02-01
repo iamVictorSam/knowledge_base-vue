@@ -1,10 +1,15 @@
 <script setup>
 import HelloWorld from "./components/HelloWorld.vue";
+import { RouterView } from 'vue-router'
+
 </script>
 
 <template>
-  <HelloWorld />
-  <!-- <h1>Sam</h1> -->
+  <RouterView />
+  <!-- <HelloWorld /> -->
 </template>
 
-<style lang="scss" scoped></style>
+
+<style lang="scss" scoped>
+
+</style>

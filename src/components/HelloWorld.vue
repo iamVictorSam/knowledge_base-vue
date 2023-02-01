@@ -9,12 +9,17 @@ export default {
       search: "",
 
       body: [],
-      
+
     };
   },
 
+  methods: {
+    shareData(post) {
+      this.$router.push({ name: 'Details', query: { post: JSON.stringify(post) } });
+    }
+  },
+
   mounted() {
-    console.log("comine");
     const butter = Butter("f957583e47b4abfd32e8921ff0987b6dbb0ce389");
 
     butter.page
@@ -45,13 +50,13 @@ export default {
 
     <div class="search-wrapper">
       <input type="text" v-model="search" placeholder="Search here.." />
-    <label>Search Question</label>
+      <label>Search Question</label>
     </div>
-    <div class="wrapper">
-      <div class="card" v-for="post in filteredList">
+    <div class="card" v-for="post in filteredList">
+      <div class="wrapper" @click="shareData(post)">
         <div class="timeDiv">
           <div class="green">{{ post.answered_by }}</div>
-          <span>{{ post.answered_on.slice(0, 10)}}</span> 
+          <span>{{ post.answered_on.slice(0, 10) }}</span>
         </div>
         <h2>{{ post.question }}</h2>
         <p v-html="post.answer"></p>
@@ -79,6 +84,7 @@ div#app {
 
   .search-wrapper {
     position: relative;
+
     label {
       position: absolute;
       font-size: 18px;
@@ -88,6 +94,7 @@ div#app {
       z-index: -1;
       transition: 0.15s all ease-in-out;
     }
+
     input {
       padding: 20px 12px;
       margin-bottom: 30px;
@@ -98,15 +105,18 @@ div#app {
       transition: 0.15s all ease-in-out;
       background: white;
       font-size: 18px;
+
       &:focus {
         outline: none;
         transform: scale(1.5);
-        & + label {
+
+        &+label {
           font-size: 18px;
           font-weight: bold;
           transform: translateY(-55px) translateX(-122px);
         }
       }
+
       &::-webkit-input-placeholder {
         font-size: 18px;
         color: rgba(0, 0, 0, 0.5);
@@ -114,6 +124,7 @@ div#app {
       }
     }
   }
+
   .title {
     color: black;
     padding-bottom: 30px;
@@ -129,17 +140,19 @@ div#app {
   }
 
   .card {
-   background-color: black;
-   border-radius: 10px;
-   padding: 60px;
+    background-color: black;
+    border-radius: 10px;
+    padding: 60px;
     box-shadow: rgba(0, 0, 0, 0.117647) 0px 4px 10px,
       rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-    width:800px;
+    width: 800px;
     margin: 20px;
     transition: 0.15s all ease-in-out;
+
     &:hover {
       transform: scale(1.1);
     }
+
     a {
       text-decoration: none;
       padding: 12px;
@@ -148,9 +161,11 @@ div#app {
       display: flex;
       flex-direction: column;
       align-items: center;
+
       img {
         height: 100px;
       }
+
       small {
         font-size: 10px;
         padding: 4px;
