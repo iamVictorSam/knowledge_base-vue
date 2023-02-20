@@ -28,7 +28,6 @@ export default {
   },
   computed: {
     filteredList() {
-      // console.log(this.body)
       return this.body.filter((post) => {
         return post.fields.kb_article_name.toLowerCase().includes(this.search.toLowerCase());
       });
