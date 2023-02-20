@@ -1,46 +1,39 @@
 <script>
 import Butter from "buttercms";
 
-
-
 export default {
   data() {
     return {
       search: "",
-
       body: [],
-
     };
   },
-
   methods: {
     shareData(post) {
       this.$router.push({ name: 'Details', query: { post: JSON.stringify(post) } });
     }
   },
-
   mounted() {
-    const butter = Butter("f957583e47b4abfd32e8921ff0987b6dbb0ce389");
 
+    const butter = Butter("cd3a6987e220e96a1d76283f0d0d928cac2d1d4d");
     butter.page
-      .retrieve("*", "how-to")
+      .list("knowledge_base_articles")
       .then((response) => {
-        console.log(response);
-        ({ body: this.body } = response.data.data.fields);
+        (this.body = response.data.data);
+        // console.log(this.body);
       })
-      .catch(function (resp) {
+      .catch((resp) => {
         console.log(resp);
       });
   },
-
   computed: {
     filteredList() {
+      // console.log(this.body)
       return this.body.filter((post) => {
-        return post.question.toLowerCase().includes(this.search.toLowerCase());
+        return post.fields.kb_article_name.toLowerCase().includes(this.search.toLowerCase());
       });
     },
   },
-
 };
 </script>
 
@@ -53,19 +46,21 @@ export default {
       <label>Search Question</label>
     </div>
     <div class="card" v-for="post in filteredList">
-      <div class="wrapper" @click="shareData(post)">
+      <!-- <div>{{ this.body }}</div> -->
+      <div class="wrapper" @click="shareData(post.slug)">
         <div class="timeDiv">
-          <div class="green">{{ post.answered_by }}</div>
-          <span>{{ post.answered_on.slice(0, 10) }}</span>
+          <!-- <div class="green">{{ post.updated }}</div> -->
+          <span class="green">{{ post.updated.slice(0, 10) }}</span>
         </div>
-        <h2>{{ post.question }}</h2>
-        <p v-html="post.answer"></p>
+        <h2>{{ post.name }}</h2>
+        <h4 class="desc">{{ post.fields.kb_article_description }}</h4>
+        <!-- <p v-html="post.answer"></p> -->
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 html,
 body {
   display: flex;
@@ -74,6 +69,11 @@ body {
   flex-direction: column;
   margin-top: 16px;
   margin-bottom: 16px;
+  overflow-x: hidden;
+}
+
+.desc {
+  color: rgb(182, 182, 182);
 }
 
 div#app {
@@ -175,7 +175,8 @@ div#app {
 
   .timeDiv {
     display: flex;
-    justify-content: space-between;
+
+    align-self: end;
   }
 
   .hotpink {
