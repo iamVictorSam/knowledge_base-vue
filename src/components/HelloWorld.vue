@@ -44,6 +44,11 @@ export default {
       <input type="text" v-model="search" placeholder="Search here.." />
       <label>Search Question</label>
     </div>
+
+    <h1 class="noText" v-if="filteredList < 1">
+      NO text here
+    </h1>
+
     <div class="card" v-for="post in filteredList">
       <!-- <div>{{ this.body }}</div> -->
       <div class="wrapper" @click="shareData(post.slug)">
@@ -74,6 +79,11 @@ body {
 .desc {
   color: rgb(182, 182, 182);
 }
+
+.noText {
+  color: black;
+}
+
 
 div#app {
   display: flex;
